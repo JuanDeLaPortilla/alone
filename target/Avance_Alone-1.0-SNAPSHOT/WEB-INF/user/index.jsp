@@ -80,8 +80,11 @@
                             </div>
                             <div class="col-sm-12 text-center card-btns">
                                 <a href="${pageContext.request.contextPath}/clothes?view=id&id=${p.id}"
-                                   class="btn btn2 btn-outline-primary d-flex" style="gap: 0.5rem">Ver m&aacute;s<i
+                                   class="btn btn2 btn-outline-primary d-flex" style="gap: 0.5rem"><i
                                         class="bi bi-eye"></i></a>
+                                <a href="${pageContext.request.contextPath}/cart?action=add&id=${p.id}"
+                                   class="btn btn2 btn-outline-danger d-flex" style="gap: 0.5rem"><i
+                                        class="bi bi-plus"></i></a>
                             </div>
                         </div>
                     </div>
@@ -113,8 +116,11 @@
                             </div>
                             <div class="col-sm-12 text-center card-btns">
                                 <a href="${pageContext.request.contextPath}/clothes?view=id&id=${p.id}"
-                                   class="btn btn2 btn-outline-primary d-flex" style="gap: 0.5rem">Ver m&aacute;s<i
+                                   class="btn btn2 btn-outline-primary d-flex" style="gap: 0.5rem"><i
                                         class="bi bi-eye"></i></a>
+                                <a href="${pageContext.request.contextPath}/cart?action=add&id=${p.id}"
+                                   class="btn btn2 btn-outline-danger d-flex" style="gap: 0.5rem"><i
+                                        class="bi bi-plus"></i></a>
                             </div>
                         </div>
                     </div>
@@ -146,8 +152,11 @@
                             </div>
                             <div class="col-sm-12 text-center card-btns">
                                 <a href="${pageContext.request.contextPath}/clothes?view=id&id=${p.id}"
-                                   class="btn btn2 btn-outline-primary d-flex" style="gap: 0.5rem">Ver m&aacute;s<i
+                                   class="btn btn2 btn-outline-primary d-flex" style="gap: 0.5rem"><i
                                         class="bi bi-eye"></i></a>
+                                <a href="${pageContext.request.contextPath}/cart?action=add&id=${p.id}"
+                                   class="btn btn2 btn-outline-danger d-flex" style="gap: 0.5rem"><i
+                                        class="bi bi-plus"></i></a>
                             </div>
                         </div>
                     </div>

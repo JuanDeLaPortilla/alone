@@ -46,6 +46,9 @@
                         </li>
                     </c:otherwise>
                 </c:choose>
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: large !important;" href="${pageContext.request.contextPath}/cart" ><i class="bi bi-cart-fill"></i></a>
+                </li>
             </ul>
         </div>
     </div>

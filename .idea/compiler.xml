@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Avance_Alone" />
+        <module name="alone" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Avance_Alone" options="-endorseddirs &quot;G:\Juan Utp\Ciclo VI\Desarrollo_Web_Integrado\Avance_Alone_Final\target/endorsed&quot;" />
+      <module name="alone" options="-endorseddirs D:\Proyectos\Java\alone\target/endorsed" />
     </option>
   </component>
 </project>

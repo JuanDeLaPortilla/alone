@@ -3,15 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
-<<<<<<< HEAD
--- Tiempo de generación: 02-05-2023 a las 04:40:05
+-- Tiempo de generación: 02-05-2023 a las 16:07:23
 -- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.1.12
-=======
--- Tiempo de generación: 08-12-2022 a las 01:51:28
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 8.1.10
->>>>>>> 58007bb04c5500227c56fc84e7b33218cfe73c56
+-- Versión de PHP: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,11 +32,7 @@ CREATE TABLE `categorias` (
   `categoria_descripcion` varchar(250) NOT NULL,
   `categoria_genero` tinyint(1) NOT NULL,
   `categoria_img` varchar(250) NOT NULL
-<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-=======
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
->>>>>>> 58007bb04c5500227c56fc84e7b33218cfe73c56
 
 --
 -- Volcado de datos para la tabla `categorias`
@@ -75,11 +65,7 @@ CREATE TABLE `detalle_ordenes` (
   `producto_id` int(11) NOT NULL,
   `detalle_orden_precio` decimal(10,0) NOT NULL,
   `detalle_orden_cantidad` int(11) NOT NULL
-<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-=======
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
->>>>>>> 58007bb04c5500227c56fc84e7b33218cfe73c56
 
 --
 -- Volcado de datos para la tabla `detalle_ordenes`
@@ -107,11 +93,7 @@ CREATE TABLE `ordenes` (
   `orden_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `orden_fecha_creacion` datetime NOT NULL DEFAULT current_timestamp()
-<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-=======
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
->>>>>>> 58007bb04c5500227c56fc84e7b33218cfe73c56
 
 --
 -- Volcado de datos para la tabla `ordenes`
@@ -144,11 +126,7 @@ CREATE TABLE `productos` (
   `producto_estado` tinyint(1) NOT NULL,
   `producto_inventario` int(11) NOT NULL,
   `producto_fecha_creacion` datetime NOT NULL DEFAULT current_timestamp()
-<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-=======
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
->>>>>>> 58007bb04c5500227c56fc84e7b33218cfe73c56
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -184,11 +162,7 @@ CREATE TABLE `usuarios` (
   `usuario_nivel` tinyint(1) NOT NULL,
   `usuario_password` varchar(250) NOT NULL,
   `usuario_fecha_creacion` datetime NOT NULL DEFAULT current_timestamp()
-<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-=======
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
->>>>>>> 58007bb04c5500227c56fc84e7b33218cfe73c56
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -258,11 +232,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `ordenes`
 --
 ALTER TABLE `ordenes`
-<<<<<<< HEAD
   MODIFY `orden_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-=======
-  MODIFY `orden_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
->>>>>>> 58007bb04c5500227c56fc84e7b33218cfe73c56
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -274,11 +244,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-<<<<<<< HEAD
   MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-=======
-  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
->>>>>>> 58007bb04c5500227c56fc84e7b33218cfe73c56
 
 --
 -- Restricciones para tablas volcadas
@@ -288,13 +254,8 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `detalle_ordenes`
 --
 ALTER TABLE `detalle_ordenes`
-<<<<<<< HEAD
   ADD CONSTRAINT `detalle_ordenes_ibfk_2` FOREIGN KEY (`orden_id`) REFERENCES `ordenes` (`orden_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `detalle_ordenes_ibfk_3` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`producto_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-=======
-  ADD CONSTRAINT `detalle_ordenes_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`producto_id`),
-  ADD CONSTRAINT `detalle_ordenes_ibfk_2` FOREIGN KEY (`orden_id`) REFERENCES `ordenes` (`orden_id`);
->>>>>>> 58007bb04c5500227c56fc84e7b33218cfe73c56
 
 --
 -- Filtros para la tabla `ordenes`
@@ -306,11 +267,7 @@ ALTER TABLE `ordenes`
 -- Filtros para la tabla `productos`
 --
 ALTER TABLE `productos`
-<<<<<<< HEAD
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`categoria_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-=======
-  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`categoria_id`);
->>>>>>> 58007bb04c5500227c56fc84e7b33218cfe73c56
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

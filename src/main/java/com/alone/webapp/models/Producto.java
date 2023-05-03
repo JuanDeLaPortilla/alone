@@ -1,13 +1,20 @@
 package com.alone.webapp.models;
 
+import com.google.gson.annotations.Expose;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Producto {
+    @Expose
     private Integer id;
+    @Expose
     private BigDecimal precio;
+    @Expose
     private String descripcion;
+    @Expose
     private Categoria categoria;
+    @Expose
     private String imagen;
     private int estado;
     private int inventario;

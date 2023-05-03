@@ -2,8 +2,8 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/slider-top.js?v=1.9"></script>
-<script src="${pageContext.request.contextPath}/assets/js/slider-tags.js?v=1.5"></script>
+<script src="${pageContext.request.contextPath}/assets/js/slider-top.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/slider-tags.js"></script>
 <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
 <script async>
     (function (w, d) {
@@ -15,3 +15,4 @@
         h.appendChild(s);
     })(window, document);
 </script>
+<script src="${pageContext.request.contextPath}/assets/js/cart/addToCart.js"></script>

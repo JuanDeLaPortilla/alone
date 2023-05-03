@@ -30,7 +30,7 @@ public class CartServlet extends HttpServlet {
         }
 
         switch (action) {
-            case "add":
+            case "find":
                 try {
                     out.print(this.sendProductJson(request));
                 } catch (SQLException | ClassNotFoundException e) {
@@ -58,6 +58,7 @@ public class CartServlet extends HttpServlet {
     private String sendProductJson(HttpServletRequest request) throws SQLException, ClassNotFoundException {
         int id = UsuariosServlet.getId(request);
         Producto producto = productoDAO.findById(id);
+        producto.setCantidad(1);
 
         Gson gson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
@@ -67,6 +68,6 @@ public class CartServlet extends HttpServlet {
     }
 
     private void redirectToJsp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
-        getServletContext().getRequestDispatcher("/WEB-INF/user/cart.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/user/cart/cart.jsp").forward(request, response);
     }
 }

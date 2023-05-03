@@ -38,7 +38,7 @@
                                     <label class="col-sm-12 text-center">${p.descripcion}</label>
                                 </div>
                                 <div class="card-body text-center">
-                                    <img src="${p.imagen}" style="max-height: 10rem !important;">
+                                    <img src="${p.imagen}" class="img-fluid" style="max-height: 10rem !important;" alt="${p.descripcion}">
                                 </div>
                                 <div class="card-footer">
                                     <div class="col-sm-12 text-center fs-4">
@@ -48,7 +48,7 @@
                                         <a href="${pageContext.request.contextPath}/clothes?view=id&id=${p.id}"
                                            class="btn btn2 btn-outline-primary d-flex" style="gap: 0.5rem"><i
                                                 class="bi bi-eye"></i></a>
-                                        <a href="${pageContext.request.contextPath}/cart?action=add&id=${p.id}"
+                                        <a onclick="addProduct(${p.id})"
                                            class="btn btn2 btn-outline-danger d-flex" style="gap: 0.5rem"><i
                                                 class="bi bi-plus"></i></a>
                                     </div>

@@ -1,41 +1,49 @@
+const container = document.getElementById('carrito')
+const parentContainer = document.getElementById('carrito-parent')
 const items = document.getElementById('items')
-const footer = document.getElementById('footer')
+const footer = document.getElementById('carrito-footer')
 const templateFooter = document.getElementById('template-footer').content
 const templateCarrito = document.getElementById('template-carrito').content
 const fragment = document.createDocumentFragment()
-let carrito = {}
 
 // Eventos
 items.addEventListener('click', e => {
     btnAumentarDisminuir(e)
 })
 
-// Traer productos
-const addProduct = async () => {
-    const res = await fetch('/cart&action=find&id=' + this.dataset.id);
-    const data = await res.json()
-    // console.log(data)
-    setCarrito(data)
-}
-
-const setCarrito = producto => {
-    if (carrito.hasOwnProperty(producto.id)) {
-        producto.cantidad = carrito[producto.id].cantidad + 1
+document.addEventListener('DOMContentLoaded', e => {
+    if (localStorage.getItem('carrito')) {
+        carrito = JSON.parse(localStorage.getItem('carrito'))
     }
-
-    carrito[producto.id] = {...producto}
-
     pintarCarrito()
-}
+});
 
 const pintarCarrito = () => {
     items.innerHTML = ''
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+
+    if (Object.keys(carrito).length === 0) {
+        parentContainer.classList.add('d-flex', 'align-items-center', 'justify-content-center')
+
+        container.innerHTML = `
+        <div class="card mb-4 d-flex align-items-center justify-content-center rounded p-3" 
+             style="background-color: white !important;
+                        box-shadow: 0px 0 30px rgb(1 41 112 / 10%) !important;
+                        border: none !important;
+                        height: 15rem !important;">
+             <span class="fs-3 text-center">¡Carrito vacío, comienza a comprar!</span>
+             <img src="" alt="">
+        </div>
+        `
+        return
+    }
 
     Object.values(carrito).forEach(producto => {
         templateCarrito.querySelector('.descripcion').textContent = producto.descripcion
-        templateCarrito.querySelector('.categoria').textContent = producto.categoria
+        templateCarrito.querySelector('.categoria').textContent = producto['categoria'].descripcion
         templateCarrito.querySelector('.cantidad').textContent = producto.cantidad
         templateCarrito.querySelector('.precio').textContent = producto.precio * producto.cantidad
+        templateCarrito.querySelector('img').setAttribute('src', producto.imagen)
 
         //botones
         templateCarrito.querySelector('.bi-file-minus-fill').dataset.id = producto.id
@@ -52,13 +60,6 @@ const pintarCarrito = () => {
 const pintarFooter = () => {
     footer.innerHTML = ''
 
-    if (Object.keys(carrito).length === 0) {
-        footer.innerHTML = `
-        <th scope="row" colspan="5">Carrito vacío, comienza a comprar</th>
-        `
-        return
-    }
-
     // sumar cantidad y sumar totales
     const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0)
     const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
@@ -73,6 +74,10 @@ const pintarFooter = () => {
 
     const boton = document.querySelector('#vaciar-carrito')
     boton.addEventListener('click', () => {
+        if (!confirm('¿Está seguro que desea eliminar todos los productos del carrito?')) {
+            return;
+        }
+
         carrito = {}
         pintarCarrito()
     })

@@ -333,12 +333,6 @@ html {
     padding: 1rem 0 !important;
 }
 
-@media screen and (max-width: 1200px) {
-    .card-btns {
-        flex-direction: column !important;
-    }
-}
-
 /*--------------------------------------------------------------
 # Sidebar
 --------------------------------------------------------------*/

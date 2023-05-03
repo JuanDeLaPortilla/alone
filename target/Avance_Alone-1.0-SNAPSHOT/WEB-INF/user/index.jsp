@@ -47,8 +47,9 @@
                     <div class="swiper-slide px-3">
                         <a class="d-block text-center text-decoration-none"
                            href="${pageContext.request.contextPath}/clothes?view=tag&id=${c.id}"
-                        style="color: black !important;">
-                            <img src="${c.img}" class="rounded" style="max-height: 10rem !important;">
+                           style="color: black !important;">
+                            <img src="${c.img}" class="img-fluid rounded" style="max-height: 10rem !important;"
+                                 alt="${c.descripcion}">
                             <p class="pt-3">${c.descripcion}</p>
                         </a>
                     </div>
@@ -72,7 +73,8 @@
                             <label class="col-sm-12 text-center">${p.descripcion}</label>
                         </div>
                         <div class="card-body text-center">
-                            <img src="${p.imagen}" style="max-height: 10rem !important;">
+                            <img src="${p.imagen}" style="max-height: 10rem !important;" alt="${p.descripcion}"
+                                 class="img-fluid">
                         </div>
                         <div class="card-footer">
                             <div class="col-sm-12 text-center fs-4">
@@ -82,7 +84,7 @@
                                 <a href="${pageContext.request.contextPath}/clothes?view=id&id=${p.id}"
                                    class="btn btn2 btn-outline-primary d-flex" style="gap: 0.5rem"><i
                                         class="bi bi-eye"></i></a>
-                                <a href="${pageContext.request.contextPath}/cart?action=add&id=${p.id}"
+                                <a onclick="addProduct(${p.id})"
                                    class="btn btn2 btn-outline-danger d-flex" style="gap: 0.5rem"><i
                                         class="bi bi-plus"></i></a>
                             </div>
@@ -108,7 +110,8 @@
                             <label class="col-sm-12 text-center">${p.descripcion}</label>
                         </div>
                         <div class="card-body text-center">
-                            <img src="${p.imagen}" style="max-height: 10rem !important;">
+                            <img src="${p.imagen}" style="max-height: 10rem !important;" alt="${p.descripcion}"
+                                 class="img-fluid">
                         </div>
                         <div class="card-footer">
                             <div class="col-sm-12 text-center fs-4">
@@ -118,7 +121,7 @@
                                 <a href="${pageContext.request.contextPath}/clothes?view=id&id=${p.id}"
                                    class="btn btn2 btn-outline-primary d-flex" style="gap: 0.5rem"><i
                                         class="bi bi-eye"></i></a>
-                                <a href="${pageContext.request.contextPath}/cart?action=add&id=${p.id}"
+                                <a onclick="addProduct(${p.id})"
                                    class="btn btn2 btn-outline-danger d-flex" style="gap: 0.5rem"><i
                                         class="bi bi-plus"></i></a>
                             </div>
@@ -144,7 +147,8 @@
                             <label class="col-sm-12 text-center">${p.descripcion}</label>
                         </div>
                         <div class="card-body text-center">
-                            <img src="${p.imagen}" style="max-height: 10rem !important;">
+                            <img src="${p.imagen}" style="max-height: 10rem !important;" alt="${p.descripcion}"
+                                 class="img-fluid">
                         </div>
                         <div class="card-footer">
                             <div class="col-sm-12 text-center fs-4">
@@ -154,7 +158,7 @@
                                 <a href="${pageContext.request.contextPath}/clothes?view=id&id=${p.id}"
                                    class="btn btn2 btn-outline-primary d-flex" style="gap: 0.5rem"><i
                                         class="bi bi-eye"></i></a>
-                                <a href="${pageContext.request.contextPath}/cart?action=add&id=${p.id}"
+                                <a onclick="addProduct(${p.id})"
                                    class="btn btn2 btn-outline-danger d-flex" style="gap: 0.5rem"><i
                                         class="bi bi-plus"></i></a>
                             </div>

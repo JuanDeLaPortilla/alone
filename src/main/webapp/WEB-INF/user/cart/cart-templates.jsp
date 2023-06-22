@@ -42,7 +42,11 @@
                 <span class="d-lg-block d-none ms-2">Vaciar Carrito</span>
             </a>
 
-            <a class="mb-0 d-flex align-items-center btn btn-primary">
+            <a class="mb-0 d-flex align-items-center btn btn-primary"
+               onclick="
+               if(confirm('&iquest;Est&aacute; seguro de realizar el pago?')){
+                   confirmPayment()
+               }">
                 <i class="bi bi-arrow-right-circle"></i>
                 <span class="d-lg-block d-none ms-2">Realizar el Pago</span>
             </a>

@@ -6,13 +6,21 @@ const confirmPayment = async () => {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
-        body: carrito
+        body: JSON.stringify(carrito)
     };
     try {
         const fetchResponse = await fetch('cart?action=payment', settings);
         const data = await fetchResponse.json();
-        console.log(data);
+        if (data===true){
+            carrito = {}
+            localStorage.setItem('carrito', JSON.stringify(carrito))
+
+            window.location.href = 'cart?action=view&page=payment_success'
+        } else {
+            alert('Vaya, algo salio mal :(')
+        }
     } catch (e) {
+        alert('Vaya, algo salio mal :(')
         console.log(e);
     }
 

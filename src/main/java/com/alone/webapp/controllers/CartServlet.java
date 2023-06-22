@@ -9,6 +9,8 @@ import com.alone.webapp.models.Usuario;
 import com.alone.webapp.util.Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,6 +23,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 @WebServlet(name = "CartServlet", value = "/cart")
 public class CartServlet extends HttpServlet {
@@ -49,10 +52,26 @@ public class CartServlet extends HttpServlet {
                 }
                 break;
             case "view":
-                try {
-                    this.redirectToCart(request, response);
-                } catch (SQLException | ClassNotFoundException e) {
-                    ProductosServlet.sendInternalError(response, e);
+                String page = request.getParameter("page");
+
+                switch (page) {
+                    case "cart":
+                        try {
+                            this.redirectToCart(request, response);
+                        } catch (Exception e) {
+                            ProductosServlet.sendInternalError(response, e);
+                        }
+                        break;
+                    case "payment_success":
+                        try {
+                            this.redirectToSuccessPage(request, response);
+                        } catch (Exception e) {
+                            ProductosServlet.sendInternalError(response, e);
+                        }
+                        break;
+                    default:
+                        UsuariosServlet.sendError(response);
+                        break;
                 }
                 break;
             default:
@@ -98,8 +117,12 @@ public class CartServlet extends HttpServlet {
         return gson.toJson(producto);
     }
 
-    private void redirectToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
+    private void redirectToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         getServletContext().getRequestDispatcher("/WEB-INF/user/cart/cart.jsp").forward(request, response);
+    }
+
+    private void redirectToSuccessPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        getServletContext().getRequestDispatcher("/WEB-INF/user/cart/payment_success.jsp").forward(request, response);
     }
 
     private String confirmPayment(HttpServletRequest request, OrdenDAO ordenDAO, DetalleOrdenDAO detalleOrdenDAO, UsuarioDAO usuarioDAO, ProductoDAO productoDAO) throws SQLException, ClassNotFoundException, IOException {
@@ -112,23 +135,39 @@ public class CartServlet extends HttpServlet {
         }
 
         // Obtiene el tipo de objeto del arrayList de productos
-        final Type productsListType = new TypeToken<ArrayList<Producto>>(){}.getType();
+        final Type productsListType = new TypeToken<ArrayList<Producto>>() {
+        }.getType();
 
         // Convierte el JSON en un objeto Java utilizando Gson
-        Gson gson = new Gson();
-        ArrayList<Producto> productos = gson.fromJson(Util.getRequestBody(request), productsListType);
+        Gson gson = new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
 
-        // Se hace una orden por cada objeto
+        String jsonBody = Util.getRequestBody(request);
+        JsonObject jsonObject = gson.fromJson(jsonBody, JsonObject.class);
+
+        ArrayList<Producto> productos = new ArrayList<>();
+
+        // Recorrer las propiedades del objeto JSON y convertirlas en objetos Producto
+        for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+            String key = entry.getKey();
+            JsonObject productJson = entry.getValue().getAsJsonObject();
+
+            Producto producto = gson.fromJson(productJson, Producto.class);
+            productos.add(producto);
+        }
+
+        // Se crea la orden de compra y se obtiene el id
+        int ordenId = OrdenServlet.setOrden(usuarioDAO, ordenDAO, usuario.getId());
+
+        // Procesar el pago para cada producto
         for (Producto producto : productos) {
             if (!OrdenServlet.paymentWentGood(
                     productoDAO,
-                    usuarioDAO,
-                    ordenDAO,
                     detalleOrdenDAO,
-                    usuario.getId(),
                     producto.getId(),
+                    ordenId,
                     producto.getCantidad())) {
-
                 return "false";
             }
         }

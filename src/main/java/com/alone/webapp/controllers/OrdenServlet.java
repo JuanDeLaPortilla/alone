@@ -157,32 +157,42 @@ public class OrdenServlet extends HttpServlet {
         int productoId = Integer.parseInt(request.getParameter("productoId"));
         int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 
-        return paymentWentGood(productoDAO, usuarioDAO, ordenDAO, detalleOrdenDAO, usuarioId, productoId, cantidad);
+        // se hace la orden y devuelve el id
+        int ordenId = setOrden(usuarioDAO, ordenDAO, usuarioId);
+
+        return paymentWentGood(productoDAO, detalleOrdenDAO, productoId, ordenId, cantidad);
     }
 
-    public static boolean paymentWentGood(ProductoDAO productoDAO, UsuarioDAO usuarioDAO, OrdenDAO ordenDAO, DetalleOrdenDAO detalleOrdenDAO, int usuarioId, int productoId, int cantidad) throws SQLException, ClassNotFoundException {
+    public static int setOrden(UsuarioDAO usuarioDAO, OrdenDAO ordenDAO, int usuarioId) throws SQLException, ClassNotFoundException {
         LocalDateTime fechaCreacion = LocalDateTime.now();
 
-        //Se encuentra el usuario y el producto de la base de datos
-        Producto producto = productoDAO.findById(productoId);
+        //Se encuentra el usuario de la base de datos
         Usuario usuario = usuarioDAO.findById(usuarioId);
+
+        //Se crean los modelos
+        DetalleOrden detalleOrden = new DetalleOrden();
+        Orden orden = new Orden(usuario, new Producto(), new DetalleOrden(), fechaCreacion);
+
+        //Se crea la orden
+        ordenDAO.add(orden);
+
+        //Se devuelve la id de la orden
+        return ordenDAO.findId(usuarioId, fechaCreacion);
+    }
+
+    public static boolean paymentWentGood(ProductoDAO productoDAO, DetalleOrdenDAO detalleOrdenDAO, int productoId, int ordenId, int cantidad) throws SQLException, ClassNotFoundException {
+        //Se encuentra el producto de la base de datos
+        Producto producto = productoDAO.findById(productoId);
 
         //Se calcula el precio
         double precio = (producto.getPrecio().doubleValue()) * cantidad;
 
         //Se crean los modelos
         DetalleOrden detalleOrden = new DetalleOrden();
-        Orden orden = new Orden(usuario, producto, detalleOrden, fechaCreacion);
 
         //Se crea la respuesta
         boolean msg = false;
         try {
-            //Se crea la orden
-            ordenDAO.add(orden);
-
-            //Se obtiene la id de la orden
-            Integer ordenId = ordenDAO.findId(usuarioId, fechaCreacion);
-
             //Se le pasan los datos al modelo
             detalleOrden.setId(ordenId);
             detalleOrden.setProducto(producto);

@@ -15,4 +15,4 @@
         h.appendChild(s);
     })(window, document);
 </script>
-<script src="${pageContext.request.contextPath}/assets/js/cart/addToCart.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/cart/addToCart.js?v=1"></script>
